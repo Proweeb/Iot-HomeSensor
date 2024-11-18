@@ -130,10 +130,20 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
 - Wait until it says Success....✔️
 
 <div align="center">
-  <img src="assets/Screenshot_Build.png" alt="Build in Visual Studio Code" width=100%>
+  <img src="assets/Screenshot_Build.png" alt="Build in Visual Studio Code">
 </div>
 
-### 7.  Flash Code unto ESP32-C3-devKitM-1 microcontroller
+### 7.  Flash Code unto ESP32-C3-devKitM-1 microcontroller⚡
+- Flash/Upload the code by pressing the arrow mark
 
-
-
+  <div align="center">
+  <img src="assets/Screenshot_Upload.png" alt="Flash in Visual Studio Code">
+  </div>
+  
+### 8. Watch the Code in Action 👷‍♂️
+- Click on the Serial Monitor to see the Microcontroller running the code
+  
+  <div align="center">
+  <img src="assets/Screenshot_Monitor.png" alt="Serial Monitor in Visual Studio Code">
+  </div>
+  
