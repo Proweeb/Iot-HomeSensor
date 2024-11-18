@@ -125,16 +125,12 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
   ```
 ### 6.  Connect  ESP32-C3-devKitM-1 microcontroller via a USB micro cabel to your computer
 ### 7.  Build the code 
--Build the code by pressing the check mark at the bottom of Visual Studio Code
-<div align="center">
-  <img src="assets/Screenshot_Build.png" alt="Build in Visual Studio Code" width=75%>
-</div>
--The console should pop up and start the gradle build
-
--Wait until it says Success ✔️
+- Build the code by pressing the check mark at the bottom of Visual Studio Code.
+- The console should pop up and start the gradle build.
+- Wait until it says Success....✔️
 
 <div align="center">
-  <img src="assets/Screenshot_Build.png" alt="Build in Visual Studio Code" width=50%>
+  <img src="assets/Screenshot_Build.png" alt="Build in Visual Studio Code" width=100%>
 </div>
 
 ### 7.  Flash Code unto ESP32-C3-devKitM-1 microcontroller
