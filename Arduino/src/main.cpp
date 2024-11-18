@@ -2,17 +2,25 @@
 #include <PubSubClient.h>
 #include <DHT.h>
 
-// WiFi and MQTT server credentials
-const char* ssid = "YourWifi";  //WIFI name/ssid
-const char* password = "password"; // WIFI Password
-const char* mqtt_server = "192.168.0.51";  // Your MQTT broker address,in this case the IP of the Computer running the backend Services
+// WiFi MQTT server credentials
+const char* ssid = "YourWifi";  // Adjust WIFI name/ssid
+const char* password = "password"; // Adjust WIFI Password
+const char* mqtt_server = "192.168.0.51";  // Adjust Your MQTT broker address,in this case the IP of the Computer running the backend Services
+
+// Names of the Topic being published to
+const char* temperture_topic="home/temperature";
+const char* humidity_topic="home/humidity";
+const char* light_topic="home/light";
 
 // DHT Sensor Setup
-#define DHTPIN 10        // Pin where the DHT11 is connected
-#define DHTTYPE DHT11    // DHT 11
+#define DHTPIN 10        // Adjust Pin where the DHT11 is connected
+#define DHTTYPE DHT11    // Adjust to Type of Sensor , in my case DHT 11
 DHT dht(DHTPIN, DHTTYPE);
 
-// MQTT Client
+// LDR Light Sensor
+const int gpioPin = GPIO_NUM_1;  //Adjust to the PIN where the Sensor is connected
+
+
 WiFiClient espClient;
 PubSubClient client(espClient);
 
@@ -88,7 +96,7 @@ void loop() {
         // Read temperature and humidity
         float temp = dht.readTemperature();
         float humidity = dht.readHumidity();
-        int lightSensorValue = analogReadRaw(GPIO_NUM_1); // Read light sensor value
+        int lightSensorValue = analogReadRaw(gpioPin); // Adjust Pin according to your own LDR
 
         // Check if any reads failed and exit early (to try again).
         if (isnan(temp) || isnan(humidity)) {
@@ -98,19 +106,19 @@ void loop() {
 
         // Publish temperature
         String tempMsg = String(temp);
-        client.publish("home/temperature", tempMsg.c_str());
+        client.publish(temperture_topic, tempMsg.c_str()); //Adjust the home part of string , with the actual location of your Chip , examples=offfice/temperature
         Serial.print("Temperature published: ");
         Serial.println(tempMsg);
 
         // Publish humidity
         String humidityMsg = String(humidity);
-        client.publish("home/humidity", humidityMsg.c_str());
+        client.publish(humidity_topic, humidityMsg.c_str()); //Adjust the home part of string , with the actual location of your Chip ,
         Serial.print("Humidity published: ");
         Serial.println(humidityMsg);
 
         // Publish light sensor value
         String lightMsg = String(lightSensorValue);
-        client.publish("home/light", lightMsg.c_str());
+        client.publish(light_topic, lightMsg.c_str()); //Adjust the home part of string , with the actual location of your Chip ,
         Serial.print("Light sensor value published: ");
         Serial.println(lightMsg);
         delay(5000);
