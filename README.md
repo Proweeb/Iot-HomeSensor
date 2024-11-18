@@ -66,26 +66,26 @@ The system architecture is summarized below:
 
 This repository assumes that the DHT11 sensor and the built-in LDR are properly connected, that you know the respective pins they are connected to, and how to address them in the Arduino code.
 
-### 1. Clone this repository:
+### 1. Clone this repository 🧑‍💻:
    ```bash
    git clone https://github.com/yourusername/IoT-HomeSensor.git
    ```
-### 2. Download USB-Drivers for Microcontroller
+### 2. Download USB-Drivers for Microcontroller⬇️
 
 - Download and install the USB-Drivers for the  **ESP32-C3 microcontroller**from [here](https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads).
 - Choose the right option for your operating system.
   
-### 3. Download Visual Studio Code and PlatformIO IDE Extension
+### 3. Download Visual Studio Code and PlatformIO IDE Extension⬇️
 
 - Download and install **Visual Studio Code (VS Code)** from [here](https://code.visualstudio.com/).
 - Install the **PlatformIO IDE Extension** by searching for "PlatformIO" in the Extensions view of Visual Studio Code.
 
-### 4. Open the Arduino Folder in Visual Studio Code
+### 4. Open the Arduino Folder in Visual Studio Code📂
 
 - Open the `Arduino` folder located in the `IoT-Home-Sensor/Arduino` directory in Visual Studio Code.
 - The PlatformIO extension should recognize the project immediately.
 
-### 5. Adjust the Code to Your Use-Case
+### 5. Adjust the Code to Your Use-Case✍️
 
 #### 5.1. Adjust Wi-Fi Name and Password
 - Update the `ssid` and `password` with your own Wi-Fi network's SSID and password:
@@ -123,8 +123,8 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
       const char* light_topic="office/light";
   
   ```
-### 6.  Connect  ESP32-C3-devKitM-1 microcontroller via a USB micro cabel to your computer
-### 7.  Build the code 
+### 6.  Connect  ESP32-C3-devKitM-1 microcontroller via a USB micro cabel to your computer🔌
+### 7.  Build the code 💻
 - Build the code by pressing the check mark at the bottom of Visual Studio Code.
 - The console should pop up and start the gradle build.
 - Wait until it says Success....✔️
