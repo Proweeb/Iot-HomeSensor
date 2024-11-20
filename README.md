@@ -3,7 +3,7 @@
 An IoT-based home monitoring system using the **ESP32-C3 microcontroller** equipped with:
 
 - A **DHT11 sensor** for measuring temperature and humidity.
-- A **built-in LDR** (light-dependent resistor) for monitoring ambient light levels.
+- A **LDR** (light-dependent resistor) for monitoring ambient light levels.
 
 The data is transmitted via **MQTT** to a backend running in **Docker**, with:
 
