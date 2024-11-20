@@ -211,3 +211,117 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
    ```
 
 - The backend setup is now complete!
+
+## Grafana Setup 📊
+
+#### 1. Login at the `localhost:3001` or the port docker is using for  Grafana 
+
+- Login by using the username admin and the password you defined in the docker-compose file under  GF_SECURITY_ADMIN_PASSWORD
+  
+   <div align="center">
+  <img src="./assets/Grafana_login.png" alt="Grafana login">
+</div>
+
+#### 2. Connect InfluxDB to Grafana as a Data Source
+
+##### Step 1: Create a New Data Source
+- Open Grafana and navigate to the **Connections section.
+    <div align="center">
+  <img src="./assets/create_datasource.png" alt="Create Datasource">
+</div>
+
+- Click **Add Data Source**.
+- Select **InfluxDB** from the list.
+
+
+<div align="center">
+  <img src="./assets/add_influxdb_datasouce.png" alt="Add InfluxDB Datasource">
+</div>
+
+#### Step 2: Configure InfluxDB Connection
+- In the configuration options, make the following adjustments:
+
+1. **Change Database Language**  
+   - Set the database language to **Flux** from **InfluxQL**.
+
+<div align="center">
+  <img src="./assets/setup_dataconnection.png" alt="Setup Data Connection">
+</div>
+
+2. **Add InfluxDB URL**  
+   - Use the InfluxDB URL from the `docker-compose.yaml` file (e.g., `http://influxdb2:8086`).
+
+3. **Enable Basic Authentication**  
+   - Turn on **Basic Auth** and provide the username and password:
+     - Username: Use `admin` or the username you set in the `docker-compose.yaml` file.
+     - Password: Use the password from the `docker-compose.yaml` file.
+
+4. **Add Organization Name and Bucket Name**  
+   - Organization Name: Use the value of `DOCKER_INFLUXDB_INIT_ORG` (default is `IotIsSimple`).
+   - Default Bucket Name: Use the value of `DOCKER_INFLUXDB_INIT_BUCKET` (default is `Iot-SysDev`).
+
+
+<div align="center">
+  <img src="./assets/setup_dataconnection_options.png" alt="Setup Data Connection Options">
+</div>
+
+#### Step 3: Save and Test
+- After entering the details, click **Save and Test** to verify the connection.
+
+### 3. Create a New Dashboard
+
+#### Step 1: Navigate to Dashboards
+- Go to the **Dashboards** section and select **New Dashboard**.
+
+<div align="center">
+  <img src="./assets/Dashboard_choice.png" alt="Dashboard Choice">
+</div>
+
+- Choose **Add a New Panel**.
+<div align="center">
+  <img src="./assets/create_dashboard.png" alt="Create Dashboard">
+</div>
+
+
+#### Step 2: Build Your Visualizations
+- Now open the `localhost:8086` in another tap 
+- Login in Influxdb via the  `DOCKER_INFLUXDB_INIT_USERNAME` and `DOCKER_INFLUXDB_INIT_PASSWORD` , you setup in the docker compose file
+  
+<div align="center">
+  <img src="./assets/influxdb_login.png" alt="Login Influxdb">
+</div>
+
+- Use the **Query Builder** to select and visualize data from the InfluxDB data source.
+
+<div align="center">
+  <img src="./assets/Query Builder.png" alt="Query Builder">
+</div>
+
+#### Step 3: Create Graph and Gauge Panels
+1. **Graph Panel**  
+   - Create a graph to display light sensor data over time.
+   - Use the query to fetch light sensor data from the bucket.
+
+<div align="center">
+  <img src="./assets/Graph_setup.png" alt="Graph Setup">
+</div>
+
+2. **Gauge Panel**  
+   - Create a gauge to show the current light sensor value.
+   - Similar queries can be used for temperature and humidity data.
+
+<div align="center">
+  <img src="./assets/Gauge_setup.png" alt="Gauge Setup">
+</div>
+
+#### Step 4: Customize Your Dashboard
+- You can create as many visualizations as you like to suit your needs.
+- Use graphs, gauges, tables, and more to display data from your sensors.
+- Example:
+<div align="center">
+  <img src="./assets/My_dashboard.png" alt=" Example Dashboard">
+</div>
+
+## Your Dashboard is Ready! 🎉
+- Experiment and design a dashboard that perfectly visualizes your IoT data.
+  
