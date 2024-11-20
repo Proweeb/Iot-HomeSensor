@@ -66,28 +66,30 @@ The system architecture is summarized below:
 
 This repository assumes that the DHT11 sensor and the built-in LDR are properly connected, that you know the respective pins they are connected to, and how to address them in the Arduino code.
 
-### 1. Clone this repository 🧑‍💻:
+## 1. Clone this repository 🧑‍💻:
    ```bash
    git clone https://github.com/yourusername/IoT-HomeSensor.git
    ```
-### 2. Download USB-Drivers for Microcontroller⬇️
+## 2. Microcontroller Setup
+
+#### 1. Download USB-Drivers for Microcontroller⬇️
 
 - Download and install the USB-Drivers for the  **ESP32-C3 microcontroller**from [here](https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads).
 - Choose the right option for your operating system.
   
-### 3. Download Visual Studio Code and PlatformIO IDE Extension⬇️
+#### 2. Download Visual Studio Code and PlatformIO IDE Extension⬇️
 
 - Download and install **Visual Studio Code (VS Code)** from [here](https://code.visualstudio.com/).
 - Install the **PlatformIO IDE Extension** by searching for "PlatformIO" in the Extensions view of Visual Studio Code.
 
-### 4. Open the Arduino Folder in Visual Studio Code📂
+#### 3. Open the Arduino Folder in Visual Studio Code📂
 
 - Open the `Arduino` folder located in the `IoT-Home-Sensor/Arduino` directory in Visual Studio Code.
 - The PlatformIO extension should recognize the project immediately.
 
-### 5. Adjust the Code to Your Use-Case✍️
+#### 4. Adjust the Code to Your Use-Case✍️
 
-#### 5.1. Adjust Wi-Fi Name and Password
+##### 6.1. Adjust Wi-Fi Name and Password
 - Update the `ssid` and `password` with your own Wi-Fi network's SSID and password:
 - Update the  `mqtt_server` IP address with the IP address of your broker
   
@@ -97,7 +99,7 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
    const char* mqtt_server = "192.168.0.51"; 
    ```
 
-#### 5.2. Adjust Pin Numbers
+##### 6.2. Adjust Pin Numbers
 - Adjust the pin numbers for the DHT11 sensor according to the pins you're using on your microcontroller.
   
   ```cpp
@@ -113,7 +115,7 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
    ```
 
 
-#### 5.3. Adjust the Location of the Chip in the Topic Name
+##### 6.3. Adjust the Location of the Chip in the Topic Name
 - Update the topic name to include the location of your chip (for example, `home/livingroom/temp`).
   
   ```cpp
@@ -123,8 +125,8 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
       const char* light_topic="office/light";
   
   ```
-### 6.  Connect  ESP32-C3-devKitM-1 microcontroller via a USB micro cabel to your computer🔌
-### 7.  Build the code 💻
+#### 6.  Connect  ESP32-C3-devKitM-1 microcontroller via a USB micro cabel to your computer🔌
+#### 7.  Build the code 💻
 - Build the code by pressing the check mark at the bottom of Visual Studio Code.
 - The console should pop up and start the gradle build.
 - Wait until it says Success....✔️
@@ -133,17 +135,79 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
   <img src="assets/Screenshot_Build.png" alt="Build in Visual Studio Code">
 </div>
 
-### 7.  Flash Code unto ESP32-C3-devKitM-1 microcontroller⚡
+#### 7.  Flash Code unto ESP32-C3-devKitM-1 microcontroller⚡
 - Flash/Upload the code by pressing the arrow mark
 
   <div align="center">
   <img src="assets/Screenshot_Upload.png" alt="Flash in Visual Studio Code">
   </div>
   
-### 8. Watch the Code in Action 👷‍♂️
+#### 8. Watch the Code in Action 👷‍♂️
 - Click on the Serial Monitor to see the Microcontroller running the code
   
   <div align="center">
   <img src="assets/Screenshot_Monitor.png" alt="Serial Monitor in Visual Studio Code">
   </div>
-  
+
+## 3.  Backend Setup 🖥️
+
+#### 1. Install Docker ⬇️
+- Ensure Docker is installed on your system. You can download it from [here](https://www.docker.com/products/docker-desktop/).  
+- Follow the installation steps for your operating system and ensure Docker is running.
+
+#### 2. Open the NodeMQTT Folder 📂
+- Navigate to the `IoT-HomeSensor` directory in Visual Studio Code.  
+- Open the `NodeMQTT` folder:  
+
+   ```bash
+   cd NodeMQTT
+   ```
+
+#### 3. Build the Docker Image 📦
+- Use the Dockerfile in the `NodeMQTT` folder to build an image of the Node.js project named **mqtt-influxdb-client**.  
+- Run the following command in the VS Code terminal:  
+
+   ```bash
+   docker build -t mqtt-influxdb-client .
+   ```
+
+#### 4. Return to the IoT-HomeSensor Directory 🔄
+- After building the image, navigate back to the main `IoT-HomeSensor` directory:  
+
+   ```bash
+   cd ..
+   ```
+
+#### 5. Adjust the Docker-Compose File ✍️
+- In the `IoT-HomeSensor` directory, locate the `docker-compose.yaml` file.  
+- This file contains environment variables for the InfluxDB and Grafana services. Adjust the passwords to your liking, but leave the bucket name if possible unchanged.
+- Changing the bucket or Organisation Name , means you have to adjust for the node app in the file as well.
+- environment values to optionally edit:  
+
+   ```yaml
+   MQTT_BROKER_URL: "mqtt://mosquitto" # Mosquitto broker URL
+
+   
+   INFLUX_URL: "http://influxdb2:8086" # InfluxDB URL
+   DOCKER_INFLUXDB_INIT_MODE: setup
+   DOCKER_INFLUXDB_INIT_USERNAME: admin # InfluxDB username
+   DOCKER_INFLUXDB_INIT_PASSWORD: HTL22_"2025 # InfluxDB password
+   DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: HTL22_"2025 # InfluxDB admin token
+   DOCKER_INFLUXDB_INIT_ORG: IotIsSimple # Organization name
+   DOCKER_INFLUXDB_INIT_BUCKET: Iot-SysDev # Bucket name 
+   INFLUX_TOKEN: HTL22_"2025 # InfluxDB token
+   INFLUX_ORG: IotIsSimple # InfluxDB organization
+   INFLUX_BUCKET: Iot-SysDev # InfluxDB bucket
+
+   
+   GF_SECURITY_ADMIN_PASSWORD: HTL22_"2025 # Grafana admin password
+   ```
+
+#### 6. Run Docker-Compose 🚀
+- After editing the `docker-compose.yaml` file, run the following command in the `IoT-HomeSensor` directory to start the backend services:  
+
+   ```bash
+   docker-compose up
+   ```
+
+- The backend setup is now complete!
