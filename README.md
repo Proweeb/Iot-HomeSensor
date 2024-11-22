@@ -15,29 +15,6 @@ This system is **efficient**, **scalable**, and **easy to deploy**, making it pe
 
 ---
 
-## Features 🚀
-
-### Hardware:
-- **ESP32-C3 microcontroller**: Low-power, Wi-Fi-enabled microcontroller.
-- **DHT11 sensor**: Reliable temperature and humidity monitoring.
-- **Built-in LDR**: Measures ambient light intensity.
-
-### Communication:
-- Lightweight **MQTT protocol** for efficient data transfer.
-
-### Backend:
-- **Node.js**: Processes sensor data and routes it to the database.
-- **InfluxDB**: Stores time-series data for easy querying and visualization.
-- **Grafana**: User-friendly dashboard for real-time insights.
-
-### Scalability:
-- Supports adding more sensors or devices as needed.
-
-### Cross-platform Deployment:
-- Runs in a **Dockerized environment** for easy setup and portability.
-
----
-
 ## System Architecture 🏗️
 
 <div align="center">
