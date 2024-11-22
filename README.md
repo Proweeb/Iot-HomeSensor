@@ -268,6 +268,8 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
   <img src="./assets/influxdb_login.png" alt="Login Influxdb">
 </div>
 
+
+
 - Use the **Query Builder** to select and visualize data from the InfluxDB data source.
 
 <div align="center">
