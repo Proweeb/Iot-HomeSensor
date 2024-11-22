@@ -300,5 +300,4 @@ This repository assumes that the DHT11 sensor and the built-in LDR are properly 
 </div>
 
 ## Your Dashboard is Ready! 🎉
-- Experiment and design a dashboard that perfectly visualizes your IoT data.
   
